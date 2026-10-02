@@ -32,14 +32,19 @@ public class TVehAlarmRow implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
+    /** 所属册头主键（行不许游到别册去） */
+    @TableField("book_id")
+    @ApiModelProperty(value = "所属册头主键")
+    private Long bookId;
+
     /** 月度报警处置核收册码 */
     @TableField("batch_no")
     @ApiModelProperty(value = "月度报警处置核收册码")
     private String batchNo;
 
-    /** 原报行次 */
+    /** 行次：进门时系统按落库先后排定，排定不再挪 */
     @TableField("row_no")
-    @ApiModelProperty(value = "原报行次")
+    @ApiModelProperty(value = "行次")
     private Integer rowNo;
 
     /** 被对上的营运车辆代号 */
@@ -66,6 +71,26 @@ public class TVehAlarmRow implements Serializable {
     @TableField("status")
     @ApiModelProperty(value = "行落地情形 0未勾 1已收下 2已退回")
     private Integer status;
+
+    /** 进门落点 1落进库里 2原样送回（进门那一步定盘，后日勾核不动它） */
+    @TableField("door_flag")
+    @ApiModelProperty(value = "进门落点 1落进库里 2原样送回")
+    private Integer doorFlag;
+
+    /** 退回缘故（写在行上） */
+    @TableField("reject_reason")
+    @ApiModelProperty(value = "退回缘故")
+    private String rejectReason;
+
+    /** 进门所属报送年度 */
+    @TableField("report_year")
+    @ApiModelProperty(value = "进门所属报送年度")
+    private Integer reportYear;
+
+    /** 所在层 0现行名单 1往期（只朝旧册开） */
+    @TableField("archived")
+    @ApiModelProperty(value = "所在层 0现行 1往期")
+    private Integer archived;
 
     /** 删除标记 0正常 1删除 */
     @TableField("del_flag")
@@ -105,6 +130,14 @@ public class TVehAlarmRow implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public String getBatchNo() {
@@ -161,6 +194,38 @@ public class TVehAlarmRow implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getDoorFlag() {
+        return doorFlag;
+    }
+
+    public void setDoorFlag(Integer doorFlag) {
+        this.doorFlag = doorFlag;
+    }
+
+    public String getRejectReason() {
+        return rejectReason;
+    }
+
+    public void setRejectReason(String rejectReason) {
+        this.rejectReason = rejectReason;
+    }
+
+    public Integer getReportYear() {
+        return reportYear;
+    }
+
+    public void setReportYear(Integer reportYear) {
+        this.reportYear = reportYear;
+    }
+
+    public Integer getArchived() {
+        return archived;
+    }
+
+    public void setArchived(Integer archived) {
+        this.archived = archived;
     }
 
     public Integer getDelFlag() {
