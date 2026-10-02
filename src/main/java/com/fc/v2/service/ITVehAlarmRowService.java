@@ -16,11 +16,18 @@ public interface ITVehAlarmRowService {
     TVehAlarmRow selectTVehAlarmRowById(Long id);
 
     /**
-     * 整批提交：逐行校验，合法的入库、非法的记入失败明细（保留原始行号），返回**成功行数**。
-     * 同一批次重复提交不得重复入库；行数超过单批上限返回 -1 且整批不入库；空批次返回 0。
+     * 整批提交：与册头服务同一道门，逐行校验，合法的落库候勾、非法的原路送回并把缘故写在行上
+     * （行次由系统按落库先后排上），返回**落库候勾行数**。
+     * 同一册码第二遍递来只照面、一行不加一行不减；行数超过单批上限返回 -1 且整批不入库；空批次返回 0。
      */
     int submitBatch(String batchNo, List<TVehAlarmRow> rows);
 
-    /** 该批次的失败行明细（按行号升序） */
+    /** 该批次的送回行明细（按行次升序） */
     List<TVehAlarmRow> listErrors(String batchNo);
+
+    /**
+     * 行勾选：只许从"未勾"落笔，勾成"收下"或"退回"（退回须把缘故写在行上）；
+     * 已落成的结果谁也不许覆，往期层的行不再勾。返回 1 勾成，否则 0。
+     */
+    int checkRow(Long id, Integer status, String remark);
 }

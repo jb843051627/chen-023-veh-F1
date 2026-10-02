@@ -67,6 +67,11 @@ public class TVehAlarmRow implements Serializable {
     @ApiModelProperty(value = "行落地情形 0未勾 1已收下 2已退回")
     private Integer status;
 
+    /** 所在层 0现行 1往期 */
+    @TableField("layer_flag")
+    @ApiModelProperty(value = "所在层 0现行 1往期")
+    private Integer layerFlag;
+
     /** 删除标记 0正常 1删除 */
     @TableField("del_flag")
     @ApiModelProperty(value = "删除标记 0正常 1删除")
@@ -161,6 +166,14 @@ public class TVehAlarmRow implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getLayerFlag() {
+        return layerFlag;
+    }
+
+    public void setLayerFlag(Integer layerFlag) {
+        this.layerFlag = layerFlag;
     }
 
     public Integer getDelFlag() {

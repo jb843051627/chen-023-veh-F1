@@ -32,6 +32,8 @@ public class V2Config
     private Boolean rollVerification;
     /** 文件路径 **/
     private String profile;
+    /** 核收册每册行数顶（处里定的顶，进门头一步先数行） **/
+    private Integer vehAlarmRowCap;
 
 	public String getName() {
 		return name;
@@ -94,6 +96,14 @@ public class V2Config
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public Integer getVehAlarmRowCap() {
+		return vehAlarmRowCap;
+	}
+
+	public void setVehAlarmRowCap(Integer vehAlarmRowCap) {
+		this.vehAlarmRowCap = vehAlarmRowCap;
 	}
 
 	/**

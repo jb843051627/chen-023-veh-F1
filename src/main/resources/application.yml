@@ -21,6 +21,8 @@ fuce:
   roll-verification: false
   # 文件路径 示例（ Windows配置D:/v2/uploadPath，Linux配置 /home/v2/uploadPath）
   profile: D:/v2/uploadPath
+  #核收册每册行数顶（处里定的顶，进门头一步先数行，压过顶整册原样退回）
+  veh-alarm-row-cap: 500
 #tomcat config
 server :
   port : 8080

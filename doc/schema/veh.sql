@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS t_veh_alarm_row (
   hours_num decimal(12,2) DEFAULT NULL COMMENT '本行采集报警条数',
   unit_kind varchar(32) DEFAULT NULL COMMENT '计量单位口径（条）',
   status int DEFAULT NULL COMMENT '行落地情形 0未勾 1已收下 2已退回',
+  layer_flag int DEFAULT '0' COMMENT '所在层 0现行 1往期',
   del_flag int DEFAULT '0' COMMENT '删除标记 0正常 1删除',
   create_by varchar(64) DEFAULT NULL COMMENT '创建者',
   create_time datetime DEFAULT NULL COMMENT '创建时间',
@@ -19,6 +20,22 @@ CREATE TABLE IF NOT EXISTS t_veh_alarm_row (
   remark varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='报警处置核收行';
+
+CREATE TABLE IF NOT EXISTS t_veh_alarm_batch (
+  id bigint NOT NULL COMMENT '主键',
+  batch_no varchar(64) DEFAULT NULL COMMENT '月度报警处置核收册码',
+  source_kind int DEFAULT NULL COMMENT '来路 0机构自录 1市里转递',
+  report_year int DEFAULT NULL COMMENT '报送年度',
+  report_month int DEFAULT NULL COMMENT '报送月度',
+  status int DEFAULT NULL COMMENT '册情形 0在核 1核讫 2空册 3已撤册',
+  del_flag int DEFAULT '0' COMMENT '删除标记 0正常 1删除',
+  create_by varchar(64) DEFAULT NULL COMMENT '创建者',
+  create_time datetime DEFAULT NULL COMMENT '创建时间',
+  update_by varchar(64) DEFAULT NULL COMMENT '更新者',
+  update_time datetime DEFAULT NULL COMMENT '更新时间',
+  remark varchar(500) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='月度报警处置核收册';
 
 CREATE TABLE IF NOT EXISTS t_veh_bind_page (
   id bigint NOT NULL COMMENT '主键',
